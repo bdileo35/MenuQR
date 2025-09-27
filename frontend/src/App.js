@@ -6,7 +6,7 @@ import { NotificationProvider } from './context/NotificationContext';
 // Páginas públicas
 import LandingPage from './pages/LandingPage';
 import SuccessPage from './pages/SuccessPage';
-import MenuView from './pages/MenuView';
+import MenuViewStatic from './pages/MenuViewStatic';
 import NotFound from './pages/NotFound';
 
 // Páginas administrativas
@@ -31,10 +31,10 @@ function App() {
               <Route path="/success" element={<SuccessPage />} />
               
               {/* Vista de menú por restaurante */}
-              <Route path="/menu/:restaurantId" element={<MenuView />} />
+              <Route path="/menu/:restaurantId" element={<MenuViewStatic />} />
               
               {/* Demo directo de Esquina Pompeya */}
-              <Route path="/esquina-pompeya" element={<MenuView />} />
+              <Route path="/esquina-pompeya" element={<MenuViewStatic />} />
               
               {/* Rutas administrativas */}
               <Route path="/admin/login" element={<Login />} />
