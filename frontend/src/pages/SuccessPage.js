@@ -75,14 +75,12 @@ const SuccessPage = () => {
 
           {/* Action Buttons */}
           <div className="space-y-4">
-            <a
-              href={restaurantUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => navigate('/esquina-pompeya')}
               className="block w-full bg-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors"
             >
               🔗 Ver Menú Digital de Esquina Pompeya
-            </a>
+            </button>
             
             <button
               onClick={() => navigate('/admin/login')}
