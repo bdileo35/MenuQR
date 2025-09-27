@@ -9,7 +9,7 @@ const LandingPage = () => {
   const handlePurchase = async () => {
     setIsProcessing(true);
     
-    // Simular proceso de compra
+    // Simular proceso de compra - FORCE DEPLOY
     setTimeout(() => {
       // Generar ID único para el restaurante
       const restaurantId = 'esquina-pompeya-' + Date.now();
