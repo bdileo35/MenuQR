@@ -23,10 +23,16 @@
       "dest": "/frontend/$1"
     }
   ],
+  "rewrites": [
+    {
+      "source": "/((?!api/.*).*)",
+      "destination": "/index.html"
+    }
+  ],
   "env": {
     "DATABASE_URL": "file:./dev.db",
     "JWT_SECRET": "menuqr-super-secret-key-2024-production",
     "NODE_ENV": "production",
-    "FRONTEND_URL": "https://menuqr-beta.vercel.app"
+    "FRONTEND_URL": "https://menu-qr-beta.vercel.app"
   }
 }

@@ -4,6 +4,8 @@ import { AuthProvider } from './context/AuthContext';
 import { NotificationProvider } from './context/NotificationContext';
 
 // Páginas públicas
+import LandingPage from './pages/LandingPage';
+import SuccessPage from './pages/SuccessPage';
 import MenuView from './pages/MenuView';
 import NotFound from './pages/NotFound';
 
@@ -24,9 +26,15 @@ function App() {
         <Router>
           <div className="min-h-screen bg-gray-50">
             <Routes>
-              {/* Rutas públicas */}
-              <Route path="/" element={<MenuView />} />
-              <Route path="/:restaurantId" element={<MenuView />} />
+              {/* Landing Page */}
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/success" element={<SuccessPage />} />
+              
+              {/* Vista de menú por restaurante */}
+              <Route path="/menu/:restaurantId" element={<MenuView />} />
+              
+              {/* Demo directo de Esquina Pompeya */}
+              <Route path="/esquina-pompeya" element={<MenuView />} />
               
               {/* Rutas administrativas */}
               <Route path="/admin/login" element={<Login />} />
