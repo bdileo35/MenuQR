@@ -1,0 +1,36 @@
+{
+  "name": "menuqr-monorepo",
+  "version": "1.0.0",
+  "description": "Aplicación web para menús QR interactivos",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "build": "npm run build --workspace=backend && npm run build --workspace=frontend",
+    "start": "npm start --workspace=backend",
+    "install:all": "npm install && npm install --workspace=backend && npm install --workspace=frontend",
+    "lint": "npm run lint --workspace=backend && npm run lint --workspace=frontend",
+    "test": "npm test --workspace=backend && npm test --workspace=frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "qr-menu",
+    "restaurant",
+    "digital-menu",
+    "react",
+    "nodejs",
+    "express",
+    "whatsapp"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^6.16.2",
+    "prisma": "^6.16.2"
+  }
+}
