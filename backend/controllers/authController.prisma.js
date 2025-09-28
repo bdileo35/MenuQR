@@ -53,7 +53,7 @@ const register = async (req, res) => {
       });
     }
 
-    const { name, email, password, restaurantName } = req.body;
+    const { name, email, password, restaurantName, restaurantId: customRestaurantId, phone, address, plan } = req.body;
 
     // Verificar si el usuario ya existe
     const existingUser = await prisma.user.findUnique({
@@ -66,20 +66,26 @@ const register = async (req, res) => {
       });
     }
 
-    // Generar ID único para el restaurante
-    const baseId = restaurantName
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '');
-    
-    let restaurantId = baseId;
-    let counter = 1;
-    
-    // Verificar que el ID sea único
-    while (await prisma.user.findUnique({ where: { restaurantId } })) {
-      restaurantId = `${baseId}-${counter}`;
-      counter++;
+    // Usar el ID personalizado si se proporciona, sino generar uno
+    let restaurantId;
+    if (customRestaurantId) {
+      restaurantId = customRestaurantId;
+    } else {
+      // Generar ID único para el restaurante
+      const baseId = restaurantName
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+      
+      restaurantId = baseId;
+      let counter = 1;
+      
+      // Verificar que el ID sea único
+      while (await prisma.user.findUnique({ where: { restaurantId } })) {
+        restaurantId = `${baseId}-${counter}`;
+        counter++;
+      }
     }
 
     // Hashear contraseña

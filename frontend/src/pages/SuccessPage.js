@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import QRCodeDisplay from '../components/QRCodeDisplay';
 
 const SuccessPage = () => {
   const location = useLocation();
@@ -17,7 +18,7 @@ const SuccessPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: '#f4f6fa' }}>
       <div className="max-w-2xl w-full">
         <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
           {/* Success Icon */}
@@ -32,6 +33,22 @@ const SuccessPage = () => {
           <p className="text-lg text-gray-600 mb-8">
             Tu restaurante ya tiene su menú digital funcionando. Compartí esta información con el dueño:
           </p>
+
+          {/* QR Code Display */}
+          <div className="bg-white rounded-xl p-6 mb-8 text-center">
+            <h3 className="text-lg font-bold mb-4" style={{ color: '#1a4fa3' }}>
+              🎯 Código QR para las mesas
+            </h3>
+            <div className="flex justify-center mb-4">
+              <QRCodeDisplay 
+                value={restaurantUrl}
+                size={200}
+              />
+            </div>
+            <p className="text-sm text-gray-600">
+              Imprimí este QR y ponelo en las mesas del restaurante
+            </p>
+          </div>
 
           {/* Restaurant Info Box */}
           <div className="bg-gray-50 rounded-xl p-6 mb-8">
@@ -77,7 +94,8 @@ const SuccessPage = () => {
           <div className="space-y-4">
             <button
               onClick={() => navigate('/esquina-pompeya')}
-              className="block w-full bg-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors"
+              className="block w-full text-white py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-all"
+              style={{ backgroundColor: '#1a4fa3' }}
             >
               🔗 Ver Menú Digital de Esquina Pompeya
             </button>

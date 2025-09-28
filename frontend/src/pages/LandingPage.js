@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import QRCodeDisplay from '../components/QRCodeDisplay';
 
 const LandingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState('basic');
@@ -7,42 +8,28 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const handlePurchase = async () => {
-    setIsProcessing(true);
-    
-    // Simular proceso de compra - FORCE DEPLOY
-    setTimeout(() => {
-      // Generar ID único para el restaurante
-      const restaurantId = 'esquina-pompeya-' + Date.now();
-      const restaurantUrl = `https://esquina-pompeya.menuqr-beta.vercel.app`;
-      
-      // Redirigir a página de éxito con los datos
-      navigate('/success', { 
-        state: { 
-          restaurantId, 
-          restaurantUrl,
-          plan: selectedPlan 
-        }
-      });
-      setIsProcessing(false);
-    }, 3000);
+    // Ir al formulario de checkout en lugar de simular directamente
+    navigate('/checkout');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50" style={{ background: '#f4f6fa' }}>
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">QR</span>
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                <span className="font-bold text-lg" style={{ color: '#1a4fa3' }}>QR</span>
               </div>
-              <h1 className="text-2xl font-bold text-gray-900">MenuQR</h1>
+              <h1 className="text-2xl font-bold">
+                <span style={{ color: '#1a4fa3' }}>Menu</span><span className="text-gray-900">QR</span>
+              </h1>
             </div>
             <nav className="hidden md:flex space-x-8">
-              <a href="#planes" className="text-gray-600 hover:text-blue-600 font-medium">Planes</a>
-              <a href="#demo" className="text-gray-600 hover:text-blue-600 font-medium">Demo</a>
-              <a href="#contacto" className="text-gray-600 hover:text-blue-600 font-medium">Contacto</a>
+              <a href="#planes" className="text-gray-600 hover:text-blue-600 font-medium" style={{ color: '#666' }}>Planes</a>
+              <a href="#demo" className="text-gray-600 hover:text-blue-600 font-medium" style={{ color: '#666' }}>Demo</a>
+              <a href="#contacto" className="text-gray-600 hover:text-blue-600 font-medium" style={{ color: '#666' }}>Contacto</a>
             </nav>
           </div>
         </div>
@@ -52,7 +39,7 @@ const LandingPage = () => {
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-gray-900 mb-6">
-            Menús Digitales QR para tu <span className="text-blue-600">Restaurante</span>
+            Menús Digitales QR para tu <span style={{ color: '#1a4fa3' }}>Restaurante</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Transforma tu carta física en un menú digital interactivo. Tus clientes escanean el QR y ven tu menú actualizado al instante.
@@ -60,12 +47,13 @@ const LandingPage = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => document.getElementById('planes').scrollIntoView()}
-              className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors"
+              className="text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-all"
+              style={{ backgroundColor: '#1a4fa3' }}
             >
-              Empezar Ahora - $2.990/mes
+              Empezar Ahora - $22.990/mes
             </button>
             <a 
-              href="https://esquina-pompeya.menuqr-beta.vercel.app" 
+              href="/esquina-pompeya-1" 
               target="_blank" 
               rel="noopener noreferrer"
               className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-50 transition-colors"
@@ -106,13 +94,12 @@ const LandingPage = () => {
           
           <div className="text-center">
             <div className="bg-white rounded-2xl shadow-xl p-8 inline-block">
-              <h3 className="text-xl font-bold mb-4">Código QR</h3>
-              <div className="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <div className="w-32 h-32 bg-black bg-opacity-10 rounded grid grid-cols-8 gap-1 p-2">
-                  {[...Array(64)].map((_, i) => (
-                    <div key={i} className={`${Math.random() > 0.5 ? 'bg-black' : 'bg-transparent'} rounded-sm`} />
-                  ))}
-                </div>
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#1a4fa3' }}>Código QR</h3>
+              <div className="flex justify-center mb-4">
+                <QRCodeDisplay 
+                  value="http://localhost:3000/esquina-pompeya-1" 
+                  size={160}
+                />
               </div>
               <p className="text-sm text-gray-600">Los clientes escanean<br/>y ven tu menú</p>
             </div>
@@ -136,7 +123,7 @@ const LandingPage = () => {
             <div className="p-8">
               <h3 className="text-2xl font-bold text-center mb-2">Plan Básico</h3>
               <div className="text-center mb-6">
-                <span className="text-5xl font-bold text-blue-600">$2.990</span>
+                <span className="text-5xl font-bold text-blue-600">$22.990</span>
                 <span className="text-gray-600">/mes</span>
               </div>
               
@@ -169,17 +156,11 @@ const LandingPage = () => {
               
               <button
                 onClick={handlePurchase}
-                disabled={isProcessing}
-                className="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={false}
+                className="w-full text-white py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-all"
+                style={{ backgroundColor: '#1a4fa3' }}
               >
-                {isProcessing ? (
-                  <div className="flex items-center justify-center">
-                    <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                    Procesando compra...
-                  </div>
-                ) : (
-                  'Empezar Ahora - Pago Simulado'
-                )}
+                Empezar Ahora - Pago Simulado
               </button>
               
               <p className="text-xs text-gray-500 text-center mt-4">
@@ -229,10 +210,12 @@ const LandingPage = () => {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">QR</span>
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <span className="font-bold text-lg" style={{ color: '#1a4fa3' }}>QR</span>
             </div>
-            <span className="text-xl font-bold">MenuQR</span>
+            <span className="text-xl font-bold">
+              <span style={{ color: '#1a4fa3' }}>Menu</span>QR
+            </span>
           </div>
           <p className="text-gray-400 mb-4">La forma más simple de digitalizar tu restaurante</p>
           <p className="text-sm text-gray-500">

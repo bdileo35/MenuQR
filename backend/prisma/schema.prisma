@@ -26,6 +26,9 @@ model User {
   password       String
   restaurantId   String   @unique
   restaurantName String
+  phone          String?
+  address        String?
+  plan           String?  @default("basic")
   role           Role     @default(ADMIN)
   avatar         String?
   isActive       Boolean  @default(true)

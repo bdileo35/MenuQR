@@ -5,12 +5,16 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "build",
+        "buildCommand": "cd frontend && npm ci && npm run build"
       }
     },
     {
       "src": "backend/server.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["backend/**"]
+      }
     }
   ],
   "routes": [
@@ -19,20 +23,20 @@
       "dest": "/backend/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/frontend/$1"
-    }
-  ],
-  "rewrites": [
+      "src": "/(.*).(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)",
+      "dest": "/frontend/$1.$2"
+    },
     {
-      "source": "/((?!api/.*).*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/frontend/index.html"
     }
   ],
+  "functions": {
+    "backend/server.js": {
+      "maxDuration": 30
+    }
+  },
   "env": {
-    "DATABASE_URL": "file:./dev.db",
-    "JWT_SECRET": "menuqr-super-secret-key-2024-production",
-    "NODE_ENV": "production",
-    "FRONTEND_URL": "https://menu-qr-beta.vercel.app"
+    "NODE_ENV": "production"
   }
 }

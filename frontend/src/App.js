@@ -5,6 +5,7 @@ import { NotificationProvider } from './context/NotificationContext';
 
 // Páginas públicas
 import LandingPage from './pages/LandingPage';
+import CheckoutForm from './pages/CheckoutForm';
 import SuccessPage from './pages/SuccessPage';
 import MenuViewStatic from './pages/MenuViewStatic';
 import NotFound from './pages/NotFound';
@@ -28,6 +29,7 @@ function App() {
             <Routes>
               {/* Landing Page */}
               <Route path="/" element={<LandingPage />} />
+              <Route path="/checkout" element={<CheckoutForm />} />
               <Route path="/success" element={<SuccessPage />} />
               
               {/* Vista de menú por restaurante */}
