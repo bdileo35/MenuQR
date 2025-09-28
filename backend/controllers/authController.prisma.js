@@ -144,7 +144,7 @@ const register = async (req, res) => {
       menu: {
         id: result.menu.id,
         restaurantId: result.menu.restaurantId,
-        url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/${restaurantId}`
+        url: `https://menu-qr-git-main-bdileo35s-projects.vercel.app/${restaurantId}`
       }
     });
   } catch (error) {

@@ -5,25 +5,18 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build",
-        "buildCommand": "cd frontend && npm ci && npm run build"
-      }
-    },
-    {
-      "src": "backend/server.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["backend/**"]
+        "distDir": "build"
       }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/backend/server.js"
+      "dest": "/api/$1",
+      "status": 404
     },
     {
-      "src": "/(.*).(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)",
+      "src": "/(.*).(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|json)",
       "dest": "/frontend/$1.$2"
     },
     {
@@ -31,12 +24,10 @@
       "dest": "/frontend/index.html"
     }
   ],
-  "functions": {
-    "backend/server.js": {
-      "maxDuration": 30
+  "rewrites": [
+    {
+      "source": "/((?!api/.*).*)",
+      "destination": "/index.html"
     }
-  },
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
